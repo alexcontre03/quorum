@@ -1,0 +1,73 @@
+{
+  "id": "payments-s2-planning",
+  "title": "Sprint 2 planning sobre reintentos, comparativa de proveedor y cobros duplicados",
+  "provider": "synthetic",
+  "meeting_date": "2026-06-22",
+  "organizer": "Ane",
+  "sprint_id": "s2",
+  "participants": [
+    { "name": "Ane", "role": "product owner" },
+    { "name": "Mikel", "role": "backend" },
+    { "name": "Leire", "role": "frontend" },
+    { "name": "Jon", "role": "qa" },
+    { "name": "Nora", "role": "support" }
+  ],
+  "metadata": {
+    "focus": "Arranque del sprint 2 con arrastre de timeout, comparativa formal de proveedor y nuevo frente de pagos duplicados",
+    "source": "synthetic-transcript",
+    "series_id": "payments-three-sprints",
+    "series_order": 4,
+    "meeting_kind": "planning",
+    "followup_of": "payments-s1-review"
+  },
+  "segments": [
+    { "timestamp": "00:00", "speaker": "Ane", "text": "Empezamos sprint 2. Esta vez quiero separar muy bien lo que quedo resuelto en observabilidad de lo que realmente sigue doliendo en pagos." },
+    { "timestamp": "00:20", "speaker": "Nora", "text": "Con logs y dashboard estamos mucho mejor, pero soporte sigue recibiendo dos tipos de ticket: pagos que tardan demasiado y algunos clientes que creen que se les ha cobrado dos veces." },
+    { "timestamp": "00:45", "speaker": "Mikel", "text": "Lo del timeout ya sabemos de donde viene. La estrategia de reintentos del endpoint de procesar pago es demasiado agresiva y necesitamos rehacerla con backoff exponencial." },
+    { "timestamp": "01:08", "speaker": "Jon", "text": "Para mi ese fix es prioridad uno del sprint. Mientras eso no este controlado, cada deploy en pagos sigue siendo delicado." },
+    { "timestamp": "01:28", "speaker": "Ane", "text": "De acuerdo. Ese compromiso pasa al sprint 2 como trabajo principal, no como coletilla del anterior." },
+    { "timestamp": "01:49", "speaker": "Leire", "text": "Sobre el proveedor de pagos, en la review dejamos claro que no ibamos a migrar aun, pero si a abrir una comparativa formal con datos reales." },
+    { "timestamp": "02:12", "speaker": "Ane", "text": "Exacto. Quiero una comparativa seria del proveedor actual frente a dos alternativas, con tiempos, errores y coste operativo, no opiniones sueltas." },
+    { "timestamp": "02:34", "speaker": "Mikel", "text": "Eso ya lo podemos hacer porque el dashboard nos da una base. Aun asi, mi sensacion sigue siendo que el proveedor actual esta peor de lo que pensabamos." },
+    { "timestamp": "02:57", "speaker": "Nora", "text": "Y el tema de cobros duplicados esta creciendo. Todavia no sabemos si son duplicados reales o percepcion del cliente, pero ya hay suficientes casos como para abrir trabajo especifico." },
+    { "timestamp": "03:21", "speaker": "Jon", "text": "Si los duplicados estan relacionados con los reintentos, deberiamos estudiarlos como frente separado pero conectado al timeout." },
+    { "timestamp": "03:43", "speaker": "Mikel", "text": "Propongo analizar esas incidencias y definir una conciliacion minima. Aunque sea manual al principio, necesitamos saber que ha pasado en cada caso." },
+    { "timestamp": "04:06", "speaker": "Leire", "text": "Eso tambien nos puede ayudar a decidir si el problema es del proveedor, de nuestra logica de reintento o de ambos." },
+    { "timestamp": "04:26", "speaker": "Ane", "text": "Bien. Entonces este sprint lleva tres frentes: fix de reintentos con backoff, comparativa formal del proveedor y analisis de cobros duplicados con una conciliacion minima." },
+    { "timestamp": "04:50", "speaker": "Ane", "text": "Y la decision de producto durante este sprint es mantener el proveedor actual mientras se hace la comparativa. No abrimos migracion todavia." },
+    { "timestamp": "05:12", "speaker": "Nora", "text": "Mientras eso no tape el problema de los clientes afectados, por mi bien. Pero la conciliacion no puede quedarse solo en teoria." },
+    { "timestamp": "05:32", "speaker": "Ane", "text": "Cerramos planning: prioridad al fix del timeout, comparativa formal con dos alternativas, estudio de duplicados y mantenimiento del proveedor actual hasta que haya conclusion." }
+  ],
+  "expected_items": [
+    {
+      "item_type": "task",
+      "title": "Corregir la estrategia de reintentos del endpoint de procesar pago con backoff exponencial",
+      "summary": "Rehacer los reintentos del endpoint para reducir los timeouts y estabilizar el flujo de pagos."
+    },
+    {
+      "item_type": "task",
+      "title": "Preparar una comparativa formal del proveedor de pagos actual frente a dos alternativas",
+      "summary": "Evaluar con datos reales tiempos, errores y coste operativo del proveedor actual frente a otras opciones."
+    },
+    {
+      "item_type": "task",
+      "title": "Analizar incidencias de cobro duplicado y definir una conciliacion minima",
+      "summary": "Estudiar si los duplicados son reales y establecer una forma minima de conciliarlos."
+    },
+    {
+      "item_type": "technical_decision",
+      "title": "Mantener el proveedor actual durante el sprint 2 mientras se realiza la comparativa formal",
+      "summary": "No se abre migracion durante este sprint; primero se completa el analisis comparativo."
+    }
+  ],
+  "expected_followups": [
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Revisar el endpoint de procesar pago que se queda colgado en produccion"
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Posponer la posible migracion de proveedor al siguiente sprint y abrir una comparativa formal"
+    }
+  ]
+}

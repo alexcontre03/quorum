@@ -1,0 +1,11 @@
+[   0s] 9 transcripts loaded (EN dataset)
+[   0s] Ollama chat timeout patched to 600s
+[   0s] System prompts redirected to prompts_en/
+[   0s] First transcript title: 'Sprint 1 midpoint on progress, blockages, and new tasks in the payment flow.'
+[   0s] mode=    off starting...
+[ 467s] mode=    off pairs=8/8 recall_micro=0.147 f1_micro=0.169 coverage=0.176
+[ 467s] mode=current starting...
+[ 974s] mode=current pairs=8/8 recall_micro=0.059 f1_micro=0.068 coverage=0.059
+[ 974s] mode=    all starting...
+[1466s] mode=    all pairs=8/8 recall_micro=0.118 f1_micro=0.136 coverage=0.147
+[1466s] DONE in 24.4 min

@@ -1,0 +1,76 @@
+{
+  "id": "payments-s1-midpoint",
+  "title": "Sprint 1 midpoint sobre avances, bloqueos y nuevas tareas del flujo de pagos",
+  "provider": "synthetic",
+  "meeting_date": "2026-06-08",
+  "organizer": "Ane",
+  "sprint_id": "s1",
+  "participants": [
+    { "name": "Ane", "role": "product owner" },
+    { "name": "Mikel", "role": "backend" },
+    { "name": "Leire", "role": "frontend" },
+    { "name": "Jon", "role": "qa" },
+    { "name": "Nora", "role": "support" }
+  ],
+  "metadata": {
+    "focus": "Seguimiento del sprint 1 con cambios de alcance, bloqueo operativo y trabajo nuevo",
+    "source": "synthetic-transcript",
+    "series_id": "payments-three-sprints",
+    "series_order": 2,
+    "meeting_kind": "midpoint",
+    "followup_of": "payments-s1-planning"
+  },
+  "segments": [
+    { "timestamp": "00:00", "speaker": "Ane", "text": "Vamos por mitad de sprint. Quiero ver que sigue bien, donde nos hemos atascado y que ha aparecido que no estaba en planning." },
+    { "timestamp": "00:19", "speaker": "Mikel", "text": "Los logs estructurados ya estan en el servicio de pagos principal, pero al implementarlo hemos visto que refunds y webhooks se quedan fuera. Hay que ampliar la tarea para cubrir esos dos puntos si queremos trazabilidad completa." },
+    { "timestamp": "00:46", "speaker": "Jon", "text": "Eso no me suena a tarea nueva, sino a que el alcance real era mayor de lo que pensabamos." },
+    { "timestamp": "01:05", "speaker": "Ane", "text": "Vale, queda como ampliacion del compromiso de logging, no como item aislado." },
+    { "timestamp": "01:24", "speaker": "Mikel", "text": "Con el dashboard tenemos un problema mas serio. El proveedor de telemetria nos ha avisado de que la licencia expira esta semana y sin renovacion no podemos desplegar paneles en produccion." },
+    { "timestamp": "01:48", "speaker": "Ane", "text": "Entonces eso es un bloqueo claro. Mientras no se renueve la licencia, el dashboard esta parado." },
+    { "timestamp": "02:05", "speaker": "Leire", "text": "Sobre las alertas de timeout, operaciones ya tiene un canal con alertas muy parecidas montado para otro equipo. Si lo reutilizamos igual evitamos crear algo duplicado." },
+    { "timestamp": "02:31", "speaker": "Ane", "text": "Confirmad eso antes de seguir. Si ya existe algo util, no tiene sentido montar otra cosa en paralelo." },
+    { "timestamp": "02:48", "speaker": "Nora", "text": "El runbook va muy bien. Ya tenemos la mitad de codigos documentados y soporte empieza a usarlo en tickets reales." },
+    { "timestamp": "03:08", "speaker": "Ane", "text": "La revision del proveedor secundario que dejamos apuntada sigue sin tocarse, verdad?" },
+    { "timestamp": "03:25", "speaker": "Mikel", "text": "Correcto. No hemos hecho comparativa ni hemos hablado con nadie. Sigue pendiente y sigue sin datos para decidir." },
+    { "timestamp": "03:46", "speaker": "Nora", "text": "Hay otra cosa nueva. Esta semana varios clientes nos han dicho que procesar pago a veces se queda colgado durante casi treinta segundos antes de responder." },
+    { "timestamp": "04:10", "speaker": "Mikel", "text": "Eso hay que investigarlo ya. Tenemos que revisar el endpoint de procesar pago en produccion y entender si el timeout viene del proveedor o de nuestros reintentos." },
+    { "timestamp": "04:34", "speaker": "Jon", "text": "Y si vamos a tocar pagos, yo necesito una smoke suite minima del flujo. Cada cambio en esta zona nos esta dando miedo desplegarlo." },
+    { "timestamp": "04:56", "speaker": "Leire", "text": "Yo anadaria una duda. Si no nos renuevan la telemetria, igual toca decidir si seguimos peleandonos con ese proveedor o si miramos otra herramienta." },
+    { "timestamp": "05:20", "speaker": "Ane", "text": "Bien. Cerramos asi: ampliacion del logging a refunds y webhooks, dashboard bloqueado por licencia, revisar si las alertas ya existen, investigar el timeout en procesar pago, preparar una smoke suite y dejar abierta la duda de la herramienta de telemetria." }
+  ],
+  "expected_items": [
+    {
+      "item_type": "task",
+      "title": "Revisar el endpoint de procesar pago que se queda colgado en produccion",
+      "summary": "Investigar los timeouts de casi treinta segundos reportados por clientes y soporte."
+    },
+    {
+      "item_type": "task",
+      "title": "Preparar una smoke suite minima para el flujo de pagos",
+      "summary": "Tener una cobertura basica que de confianza antes de desplegar cambios en pagos."
+    },
+    {
+      "item_type": "ambiguous_task",
+      "title": "Valorar si renovar la telemetria actual o mirar otra herramienta",
+      "summary": "Se plantea como duda abierta a partir del bloqueo de licencia, sin decision formal todavia."
+    }
+  ],
+  "expected_followups": [
+    {
+      "followup_type": "scope_change",
+      "matched_history_title": "Anadir logs estructurados al servicio de pagos con request_id y tenant"
+    },
+    {
+      "followup_type": "new_blocker",
+      "matched_history_title": "Crear un dashboard de errores 5xx del checkout"
+    },
+    {
+      "followup_type": "possible_duplicate",
+      "matched_history_title": "Alertar cuando suban los timeouts del proveedor de pagos"
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Revisar si conviene trabajar con un proveedor de pagos secundario"
+    }
+  ]
+}

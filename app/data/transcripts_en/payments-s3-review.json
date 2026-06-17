@@ -1,0 +1,134 @@
+{
+  "id": "payments-s3-review",
+  "title": "Sprint 3 review and retrospective on the closure of the payment front and provider strategy.",
+  "provider": "synthetic",
+  "meeting_date": "2026-07-27",
+  "organizer": "Ane",
+  "sprint_id": "s3",
+  "participants": [
+    {
+      "name": "Ane",
+      "role": "product owner"
+    },
+    {
+      "name": "Mikel",
+      "role": "backend"
+    },
+    {
+      "name": "Leire",
+      "role": "frontend"
+    },
+    {
+      "name": "Jon",
+      "role": "qa"
+    },
+    {
+      "name": "Nora",
+      "role": "support"
+    }
+  ],
+  "metadata": {
+    "focus": "Closure of the series with real improvements in payments, operational reconciliation, and a nuanced decision on the alternative provider.",
+    "source": "synthetic-transcript",
+    "series_id": "payments-three-sprints",
+    "series_order": 9,
+    "meeting_kind": "review",
+    "followup_of": "payments-s3-midpoint"
+  },
+  "segments": [
+    {
+      "timestamp": "00:00",
+      "speaker": "Ane",
+      "text": "We’re wrapping up sprint 3 and also this long work cycle on payments. I want us to be precise about what is really resolved and what we’ve just set in motion."
+    },
+    {
+      "timestamp": "00:23",
+      "speaker": "Mikel",
+      "text": "I consider the timeout fix closed. We adjusted the Apple Pay callback, completed the rollout in wallets, and the long timeouts have dropped significantly since June."
+    },
+    {
+      "timestamp": "00:49",
+      "speaker": "Jon",
+      "text": "From QA, we’ve validated it with the smoke suite and with controlled real traffic. I don’t see any reason to keep that incident open."
+    },
+    {
+      "timestamp": "01:10",
+      "speaker": "Nora",
+      "text": "You can also see it in support. The cases of hanging payments have decreased a lot, and the actual duplicates are now detected with the new reconciliation in less than an hour."
+    },
+    {
+      "timestamp": "01:34",
+      "speaker": "Leire",
+      "text": "The minimum reconciliation isn’t a perfect system, but it is an operational solution that already avoids having to review all the tickets manually."
+    },
+    {
+      "timestamp": "01:55",
+      "speaker": "Ane",
+      "text": "So both the timeout fix and the minimum reconciliation are considered closed in this sprint."
+    },
+    {
+      "timestamp": "02:17",
+      "speaker": "Mikel",
+      "text": "Regarding the alternative provider, the five percent canary has performed better in latency and wallet errors, but I don’t want to sell it as a won migration. We still need to see operational costs and behavior at a larger volume."
+    },
+    {
+      "timestamp": "02:45",
+      "speaker": "Jon",
+      "text": "I agree. What we can decide is the next step, not the end of the movie."
+    },
+    {
+      "timestamp": "03:04",
+      "speaker": "Ane",
+      "text": "My proposal is to keep the current provider as the main one, scale the canary of the alternative to twenty percent of wallets in the next sprint, and reevaluate with more data before any broad migration."
+    },
+    {
+      "timestamp": "03:32",
+      "speaker": "Leire",
+      "text": "That seems ambitious enough and at the same time prudent. We’re neither staying still nor pretending that the strategic problem is already solved."
+    },
+    {
+      "timestamp": "03:53",
+      "speaker": "Nora",
+      "text": "It’s also better for support this way. We prefer a gradual change that we can explain rather than a sudden migration."
+    },
+    {
+      "timestamp": "04:12",
+      "speaker": "Mikel",
+      "text": "So I’ll close with that reading: the current canary is considered successful as an experiment, but the provider decision remains open at a strategic level."
+    },
+    {
+      "timestamp": "04:34",
+      "speaker": "Ane",
+      "text": "Perfect. We’re closing the series with real improvement in payments and with a nuanced decision: we keep the main provider, expand the canary in wallets, and continue reevaluating."
+    }
+  ],
+  "expected_items": [
+    {
+      "item_type": "technical_decision",
+      "title": "Keep the current provider as primary and expand the canary of the alternative to 20 percent of wallets in the next sprint.",
+      "summary": "The initial canary works, but the team opts for a gradual expansion instead of an immediate large migration."
+    }
+  ],
+  "expected_followups": [
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Correct the retry strategy of the payment processing endpoint with exponential backoff."
+    },
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Extend the rollout of the retry fix to the wallets adapter and measure its real impact."
+    },
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Automate a minimal reconciliation of duplicate payments with the stable settlement export."
+    },
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Launch a canary of the alternative provider on 5 percent of wallet traffic."
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Open the canary of the alternative provider during sprint 3 instead of waiting for the next."
+    }
+  ]
+}

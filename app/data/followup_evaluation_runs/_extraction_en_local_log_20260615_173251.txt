@@ -1,0 +1,5 @@
+[   0s] 9 transcripts loaded (EN dataset)
+[   0s] starting extraction evaluation...
+[ 215s] done — expected=26 detected=45 matched=15 precision=0.333 recall=0.577 f1=0.422
+[ 215s] wrote cdia_extraction_en_local.json
+[ 215s] DONE in 3.6 min

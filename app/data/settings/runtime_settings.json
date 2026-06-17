@@ -1,0 +1,8 @@
+{
+  "profile": "openai",
+  "model_overrides": {
+    "local": null,
+    "openai": null,
+    "anthropic": "claude-3-5-sonnet-20241022"
+  }
+}

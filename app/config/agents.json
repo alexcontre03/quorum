@@ -1,0 +1,125 @@
+{
+  "pipeline_id": "meeting_analysis_pipeline_v8",
+  "pipeline": [
+    "task_proposal_agent",
+    "task_validation_agent",
+    "issue_draft_agent",
+    "git_evidence_agent",
+    "task_followup_agent",
+    "jira_issue_lookup_agent"
+  ],
+  "agents": [
+    {
+      "id": "task_proposal_agent",
+      "name": "Task Proposal Agent",
+      "description": "Reads the meeting transcript and proposes task candidates, ambiguous tasks and technical decisions.",
+      "agent_kind": "task_proposal",
+      "provider": "ollama",
+      "enabled": true,
+      "model": "gemma3:4b",
+      "base_url": "http://127.0.0.1:11434/api",
+      "input_key": "meeting_transcript",
+      "output_key": "task_candidates",
+      "system_prompt_path": "config/prompts/task_proposal_agent_system.txt",
+      "format": "json",
+      "response_schema": "task_candidates_v1",
+      "temperature": 0.1,
+      "options": {
+        "num_predict": 2000
+      }
+    },
+    {
+      "id": "task_validation_agent",
+      "name": "Task Validation Agent",
+      "description": "Reviews initial task candidates, removes weak items, normalizes titles and corrects classifications.",
+      "agent_kind": "task_validation",
+      "provider": "ollama",
+      "enabled": true,
+      "model": "qwen2.5:7b",
+      "base_url": "http://127.0.0.1:11434/api",
+      "input_key": "task_candidates",
+      "output_key": "validated_task_candidates",
+      "system_prompt_path": "config/prompts/task_validation_agent_system.txt",
+      "format": "json",
+      "response_schema": "validated_task_candidates_v1",
+      "temperature": 0.1,
+      "options": {
+        "num_predict": 2000
+      }
+    },
+    {
+      "id": "issue_draft_agent",
+      "name": "Issue Draft Agent",
+      "description": "Converts validated meeting items into issue-ready drafts using LLM generation.",
+      "agent_kind": "issue_draft",
+      "provider": "ollama",
+      "enabled": true,
+      "model": "gemma3:4b",
+      "base_url": "http://127.0.0.1:11434/api",
+      "input_key": "validated_task_candidates",
+      "output_key": "issue_ready_items",
+      "system_prompt_path": "config/prompts/issue_draft_agent_system.txt",
+      "format": "json",
+      "response_schema": "issue_drafts_v1",
+      "temperature": 0.2,
+      "options": {
+        "num_predict": 2500
+      }
+    },
+    {
+      "id": "task_followup_agent",
+      "name": "Task Followup Agent",
+      "description": "Compares new meeting items against history from previous meetings to detect recurring tasks, scope changes, blockers and verbal closes.",
+      "agent_kind": "task_followup",
+      "provider": "ollama",
+      "enabled": true,
+      "model": "qwen2.5:7b",
+      "base_url": "http://127.0.0.1:11434/api",
+      "input_key": "issue_ready_items",
+      "output_key": "followup_result",
+      "system_prompt_path": "config/prompts/task_followup_agent_system.txt",
+      "format": "json",
+      "response_schema": "followup_result_v1",
+      "temperature": 0.1,
+      "options": {
+        "num_predict": 2000
+      }
+    },
+    {
+      "id": "git_evidence_agent",
+      "name": "Git Evidence Agent",
+      "description": "For each active commitment in history, searches Git commits by keyword and uses LLM to reason whether they constitute evidence that the commitment has progressed. Feeds the follow-up reasoning.",
+      "agent_kind": "git_evidence",
+      "provider": "ollama",
+      "enabled": true,
+      "model": "gemma3:4b",
+      "base_url": "http://127.0.0.1:11434/api",
+      "input_key": "history",
+      "output_key": "history_git_evidence",
+      "system_prompt_path": "config/prompts/git_evidence_agent_system.txt",
+      "format": "json",
+      "response_schema": "git_evidence_v1",
+      "temperature": 0.1,
+      "options": {
+        "num_predict": 1200
+      }
+    },
+    {
+      "id": "jira_issue_lookup_agent",
+      "name": "Jira Issue Lookup Agent",
+      "description": "Searches Jira Cloud for existing issues related to each issue-ready meeting item.",
+      "agent_kind": "jira_issue_lookup",
+      "provider": "jira",
+      "enabled": true,
+      "model": "rest-api-search",
+      "base_url": "https://contrerastfg.atlassian.net",
+      "input_key": "issue_ready_items",
+      "output_key": "jira_enriched_items",
+      "system_prompt_path": "config/prompts/jira_issue_lookup_agent_system.txt",
+      "format": "internal",
+      "response_schema": null,
+      "temperature": 0.0,
+      "options": {}
+    }
+  ]
+}

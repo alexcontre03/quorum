@@ -1,0 +1,73 @@
+{
+  "id": "payments-s1-planning",
+  "title": "Sprint 1 planning sobre observabilidad y estabilidad del flujo de pagos",
+  "provider": "synthetic",
+  "meeting_date": "2026-06-01",
+  "organizer": "Ane",
+  "sprint_id": "s1",
+  "participants": [
+    { "name": "Ane", "role": "product owner" },
+    { "name": "Mikel", "role": "backend" },
+    { "name": "Leire", "role": "frontend" },
+    { "name": "Jon", "role": "qa" },
+    { "name": "Nora", "role": "support" }
+  ],
+  "metadata": {
+    "focus": "Inicio de la serie: compromisos base de observabilidad, soporte y decision de proveedor",
+    "source": "synthetic-transcript",
+    "series_id": "payments-three-sprints",
+    "series_order": 1,
+    "meeting_kind": "planning"
+  },
+  "segments": [
+    { "timestamp": "00:00", "speaker": "Ane", "text": "Este sprint quiero atacar la parte mas dolorosa del flujo de pagos. Seguimos reaccionando tarde cuando algo falla y soporte no tiene forma de explicar que ha pasado." },
+    { "timestamp": "00:20", "speaker": "Nora", "text": "Totalmente. Cuando el cliente dice que el cobro se ha quedado a medias, lo unico que podemos hacer es pedir capturas y escalar a desarrollo." },
+    { "timestamp": "00:42", "speaker": "Mikel", "text": "Lo primero para dejar de ir a ciegas es anadir logs estructurados al servicio de pagos con request_id, tenant y resultado del proveedor. Sin eso no podemos correlacionar nada." },
+    { "timestamp": "01:05", "speaker": "Jon", "text": "Si no tenemos request_id de extremo a extremo luego en QA tampoco podemos reconstruir que llamada exacta se rompio." },
+    { "timestamp": "01:24", "speaker": "Ane", "text": "Vale, eso es compromiso claro del sprint. Quiero que lo tratemos como base de todo lo demas." },
+    { "timestamp": "01:45", "speaker": "Mikel", "text": "Ademas necesitamos un dashboard muy basico de errores 5xx del checkout. Con volumen por hora y desglose por codigo ya podriamos detectar si hay un patron raro." },
+    { "timestamp": "02:09", "speaker": "Leire", "text": "Y por mi parte quiero alertas cuando suban los timeouts del proveedor. Cuando el usuario se queda esperando, frontend es quien se come primero la frustracion." },
+    { "timestamp": "02:31", "speaker": "Nora", "text": "A soporte tambien le ayudaria tener documentados los codigos de error del proveedor. Ahora cada vez que aparece uno nuevo tenemos que preguntarle a Mikel que significa." },
+    { "timestamp": "02:54", "speaker": "Mikel", "text": "Eso os lo puedo dejar en una pagina del runbook. No es complejo, simplemente nadie lo ha parado a escribir." },
+    { "timestamp": "03:14", "speaker": "Ane", "text": "Bien, entonces tenemos logs, dashboard, alertas y runbook. Quiero dejar tambien registrada una duda que llevamos arrastrando." },
+    { "timestamp": "03:35", "speaker": "Ane", "text": "Llevamos meses diciendo que quizas necesitamos un proveedor de pagos secundario para no depender tanto del actual. No digo abrirlo ya, pero si revisar si tiene sentido." },
+    { "timestamp": "03:58", "speaker": "Jon", "text": "Yo ahora mismo no lo meteria como trabajo duro del sprint. Sin observabilidad ni numeros comparables seria decidir por sensaciones." },
+    { "timestamp": "04:20", "speaker": "Mikel", "text": "Estoy de acuerdo. Primero datos. Si luego vemos picos raros o mala disponibilidad ya discutimos si compensa buscar alternativa." },
+    { "timestamp": "04:42", "speaker": "Leire", "text": "O sea, la revision del proveedor secundario se deja apuntada, pero no entramos aun a migracion ni comparativas largas." },
+    { "timestamp": "05:01", "speaker": "Ane", "text": "Correcto. Dejamos esa revision como pendiente y la decision explicita de este sprint es mantener el proveedor actual mientras montamos observabilidad." },
+    { "timestamp": "05:25", "speaker": "Nora", "text": "Eso me vale si de verdad cerramos lo del runbook, porque ahora mismo soporte va completamente ciego." },
+    { "timestamp": "05:43", "speaker": "Ane", "text": "Cerramos el planning: logs estructurados, dashboard de 5xx, alertas de timeout, runbook de errores y la revision del proveedor secundario como asunto abierto para mas adelante." }
+  ],
+  "expected_items": [
+    {
+      "item_type": "task",
+      "title": "Anadir logs estructurados al servicio de pagos con request_id y tenant",
+      "summary": "Permitir correlacionar llamadas, errores y respuesta del proveedor en el flujo de pagos."
+    },
+    {
+      "item_type": "task",
+      "title": "Crear un dashboard de errores 5xx del checkout",
+      "summary": "Visualizar volumen por hora y desglose por codigo para detectar patrones de fallo."
+    },
+    {
+      "item_type": "task",
+      "title": "Alertar cuando suban los timeouts del proveedor de pagos",
+      "summary": "Disparar una senal operativa cuando el proveedor empeore y el usuario se quede esperando."
+    },
+    {
+      "item_type": "task",
+      "title": "Documentar los codigos de error del proveedor para soporte",
+      "summary": "Crear una pagina del runbook para que soporte pueda interpretar errores sin depender de desarrollo."
+    },
+    {
+      "item_type": "ambiguous_task",
+      "title": "Revisar si conviene trabajar con un proveedor de pagos secundario",
+      "summary": "Se plantea como revision posterior, todavia sin compromiso de migracion ni comparativa formal."
+    },
+    {
+      "item_type": "technical_decision",
+      "title": "Mantener el proveedor actual durante el sprint mientras se monta observabilidad",
+      "summary": "El equipo decide no mover proveedor hasta disponer de datos reales sobre estabilidad y errores."
+    }
+  ]
+}

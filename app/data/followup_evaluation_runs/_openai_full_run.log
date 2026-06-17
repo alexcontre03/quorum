@@ -1,0 +1,7 @@
+[   0s] 9 transcripts loaded
+[   0s] All chat agents now backed by gpt-4o-mini
+[   0s] Embeddings still use local embeddinggemma
+[1985s] mode=    off pairs=8/8 recall_micro=0.088 f1_micro=0.105 coverage=0.118
+[1985s] mode=current pairs=8/8 recall_micro=0.176 f1_micro=0.171 coverage=0.176
+[1985s] mode=    all pairs=8/8 recall_micro=0.147 f1_micro=0.137 coverage=0.176
+[1985s] DONE in 33.1 min

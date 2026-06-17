@@ -1,0 +1,140 @@
+{
+  "id": "payments-s2-midpoint",
+  "title": "Sprint 2 midpoint on technical refinement, reconciliation blockage, and provider data.",
+  "provider": "synthetic",
+  "meeting_date": "2026-06-29",
+  "organizer": "Ane",
+  "sprint_id": "s2",
+  "participants": [
+    {
+      "name": "Ane",
+      "role": "product owner"
+    },
+    {
+      "name": "Mikel",
+      "role": "backend"
+    },
+    {
+      "name": "Leire",
+      "role": "frontend"
+    },
+    {
+      "name": "Jon",
+      "role": "qa"
+    },
+    {
+      "name": "Nora",
+      "role": "support"
+    }
+  ],
+  "metadata": {
+    "focus": "Follow-up on sprint 2 with refinement of the retry fix and external blockage in reconciliation.",
+    "source": "synthetic-transcript",
+    "series_id": "payments-three-sprints",
+    "series_order": 5,
+    "meeting_kind": "midpoint",
+    "followup_of": "payments-s2-planning"
+  },
+  "segments": [
+    {
+      "timestamp": "00:00",
+      "speaker": "Ane",
+      "text": "Mid-sprint. I want to see if we're really solving the problem or just getting a better understanding of the pain."
+    },
+    {
+      "timestamp": "00:18",
+      "speaker": "Mikel",
+      "text": "The fix for the timeout has grown in scope. Just with exponential backoff it's not enough; we need to add an idempotency key and explicit retry tracing or we'll keep having weird cases."
+    },
+    {
+      "timestamp": "00:44",
+      "speaker": "Jon",
+      "text": "That changes the work quite a bit, but it makes sense. If you retry without idempotency, you can reduce the timeout and still leave inconsistent effects."
+    },
+    {
+      "timestamp": "01:05",
+      "speaker": "Ane",
+      "text": "Okay, so the fix doesn't simplify: it expands to backoff plus idempotency key and retry tracing."
+    },
+    {
+      "timestamp": "01:27",
+      "speaker": "Nora",
+      "text": "With the duplicate charges, we have a blockage. Finance isn't giving us stable access to the settlement export and without that, we can't reconcile the reported cases properly."
+    },
+    {
+      "timestamp": "01:51",
+      "speaker": "Leire",
+      "text": "Without reliable export, we're going to keep looking at each case manually. That blocks any sort of semi-automated solution."
+    },
+    {
+      "timestamp": "02:12",
+      "speaker": "Ane",
+      "text": "Agreed, that remains as an explicit blockage on the duplicate front."
+    },
+    {
+      "timestamp": "02:31",
+      "speaker": "Mikel",
+      "text": "The provider comparison already has initial data. The current one performs worse on Monday mornings, but we still don't have a complete picture and I need to factor in operational cost."
+    },
+    {
+      "timestamp": "02:57",
+      "speaker": "Jon",
+      "text": "So, we're still comparing, but without a conclusion yet."
+    },
+    {
+      "timestamp": "03:15",
+      "speaker": "Leire",
+      "text": "If the Monday data is confirmed, we might need to prepare a controlled test with an alternative provider on a small part of the traffic."
+    },
+    {
+      "timestamp": "03:38",
+      "speaker": "Ane",
+      "text": "Let's not decide to move traffic yet, but let's keep that option as a possible evaluation if the analysis continues pointing in the same direction."
+    },
+    {
+      "timestamp": "03:59",
+      "speaker": "Mikel",
+      "text": "I would note it down already. Not as an immediate rollout, but as a potential technical canary."
+    },
+    {
+      "timestamp": "04:19",
+      "speaker": "Nora",
+      "text": "In the meantime, support is still handling duplicates manually and we can't promise a closure date to those customers."
+    },
+    {
+      "timestamp": "04:40",
+      "speaker": "Ane",
+      "text": "Closing midpoint: the timeout fix is expanding in scope, duplicates are blocked by finance, the comparison remains open, and we note the possible controlled test with an alternative provider."
+    }
+  ],
+  "expected_items": [
+    {
+      "item_type": "task",
+      "title": "Add idempotency key and retry traceability to the fix of the payment processing endpoint.",
+      "summary": "Extend the technical fix to avoid inconsistent effects and better track each retry."
+    },
+    {
+      "item_type": "ambiguous_task",
+      "title": "Evaluate a controlled test with partial traffic on an alternative provider.",
+      "summary": "Possible technical canary if the comparison continues to show degradation of the current provider."
+    }
+  ],
+  "expected_followups": [
+    {
+      "followup_type": "scope_change",
+      "matched_history_title": "Correct the retry strategy of the payment processing endpoint with exponential backoff."
+    },
+    {
+      "followup_type": "new_blocker",
+      "matched_history_title": "Analyze incidents of duplicate charges and define a minimal reconciliation."
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Prepare a formal comparison of the current payment provider against two alternatives."
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Keep the current provider during sprint 2 while the formal comparison is conducted."
+    }
+  ]
+}

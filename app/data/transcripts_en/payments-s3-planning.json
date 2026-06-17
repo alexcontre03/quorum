@@ -1,0 +1,150 @@
+{
+  "id": "payments-s3-planning",
+  "title": "Sprint 3 planning on the rollout of the payment fix, reconciliation, and canary of the alternative provider.",
+  "provider": "synthetic",
+  "meeting_date": "2026-07-13",
+  "organizer": "Ane",
+  "sprint_id": "s3",
+  "participants": [
+    {
+      "name": "Ane",
+      "role": "product owner"
+    },
+    {
+      "name": "Mikel",
+      "role": "backend"
+    },
+    {
+      "name": "Leire",
+      "role": "frontend"
+    },
+    {
+      "name": "Jon",
+      "role": "qa"
+    },
+    {
+      "name": "Nora",
+      "role": "support"
+    }
+  ],
+  "metadata": {
+    "focus": "Start of sprint 3 with stable access to reconciliation, rollout of the fix, and change of stance on the provider.",
+    "source": "synthetic-transcript",
+    "series_id": "payments-three-sprints",
+    "series_order": 7,
+    "meeting_kind": "planning",
+    "followup_of": "payments-s2-review"
+  },
+  "segments": [
+    {
+      "timestamp": "00:00",
+      "speaker": "Ane",
+      "text": "We're entering sprint 3. I want this sprint to be about closing things that have been open for too long without coming up with a pretty ending that won't hold up later."
+    },
+    {
+      "timestamp": "00:22",
+      "speaker": "Nora",
+      "text": "Good news first: finance has finally given us stable access to the settlement export. We no longer depend on requesting a CSV manually every time."
+    },
+    {
+      "timestamp": "00:47",
+      "speaker": "Ane",
+      "text": "Perfect. So we can consider the access request closed and the main blockage for reconciliation disappears."
+    },
+    {
+      "timestamp": "01:08",
+      "speaker": "Mikel",
+      "text": "With that, we can really do a minimum reconciliation. Not just looking at cases manually, but cross-referencing attempts, settlements, and the provider's results."
+    },
+    {
+      "timestamp": "01:31",
+      "speaker": "Jon",
+      "text": "And the timeout fix is still open. The idempotency key part is done, but we need to extend the rollout to the wallets adapter and measure it with real traffic."
+    },
+    {
+      "timestamp": "01:55",
+      "speaker": "Leire",
+      "text": "In the frontend, we also need to better instrument the wallet callbacks because there are still some weird states showing up."
+    },
+    {
+      "timestamp": "02:18",
+      "speaker": "Ane",
+      "text": "Okay, that commitment doesn't go away: it gets refined and is taken to a progressive rollout on wallets."
+    },
+    {
+      "timestamp": "02:40",
+      "speaker": "Mikel",
+      "text": "Regarding the provider, with the comparison in hand and the freeze already over, I wouldn't wait until sprint 4 to test something. I propose opening a canary for the alternative provider at five percent of the wallet traffic."
+    },
+    {
+      "timestamp": "03:07",
+      "speaker": "Jon",
+      "text": "That changes what we said in the last review. There we agreed to keep the current provider throughout this sprint and only prepare the canary for later."
+    },
+    {
+      "timestamp": "03:29",
+      "speaker": "Ane",
+      "text": "Correct. If we take that step, it needs to be treated as a decision change, not just simple continuity."
+    },
+    {
+      "timestamp": "03:50",
+      "speaker": "Leire",
+      "text": "I'm on board if the canary is limited to wallets and if we have a clear rollback. I wouldn't buy a broader change without that safety net."
+    },
+    {
+      "timestamp": "04:13",
+      "speaker": "Nora",
+      "text": "And in the meantime, I want reconciliation to stop being artisanal. If we can detect real duplicates in less than an hour, support gains a lot."
+    },
+    {
+      "timestamp": "04:37",
+      "speaker": "Ane",
+      "text": "So the three fronts of the sprint are: progressive rollout of the fix in wallets, minimum automatable reconciliation, and a very controlled canary of the alternative provider."
+    },
+    {
+      "timestamp": "05:00",
+      "speaker": "Ane",
+      "text": "Let's put the new decision in writing: we open a limited canary in sprint 3 instead of waiting for the next one, because now we have comparison, observability, and the end of the freeze."
+    }
+  ],
+  "expected_items": [
+    {
+      "item_type": "task",
+      "title": "Extend the rollout of the retry fix to the wallets adapter and measure its real impact.",
+      "summary": "Deploy the already implemented fix to wallet traffic and monitor its behavior with real data."
+    },
+    {
+      "item_type": "task",
+      "title": "Automate a minimal reconciliation of duplicate payments with the stable settlement export.",
+      "summary": "Cross attempts, settlements, and provider results to stop resolving duplicates manually."
+    },
+    {
+      "item_type": "task",
+      "title": "Launch a canary of the alternative provider on 5 percent of wallet traffic.",
+      "summary": "Test a limited alternative provider with a clear rollback and complete observability."
+    },
+    {
+      "item_type": "technical_decision",
+      "title": "Open the canary of the alternative provider during sprint 3 instead of waiting for the next.",
+      "summary": "The team changes the previous stance because it now has a comparison, observability, and the end of the contractual freeze."
+    }
+  ],
+  "expected_followups": [
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Request stable access to the settlement export to unblock the reconciliation of duplicates."
+    },
+    {
+      "followup_type": "blocker_resolved",
+      "matched_history_title": "Analyze incidents of duplicate charges and define a minimal reconciliation."
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Correct the retry strategy of the payment processing endpoint with exponential backoff."
+    },
+    {
+      "followup_type": "contradicts_decision",
+      "matched_history_title": "Keep the current provider during sprint 3 with weekly SLO tracking and prepare a technical canary after the freeze."
+    }
+  ]
+}

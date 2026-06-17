@@ -1,0 +1,67 @@
+{
+  "id": "payments-s3-review",
+  "title": "Sprint 3 review y retrospectiva sobre cierre del frente de pagos y estrategia de proveedor",
+  "provider": "synthetic",
+  "meeting_date": "2026-07-27",
+  "organizer": "Ane",
+  "sprint_id": "s3",
+  "participants": [
+    { "name": "Ane", "role": "product owner" },
+    { "name": "Mikel", "role": "backend" },
+    { "name": "Leire", "role": "frontend" },
+    { "name": "Jon", "role": "qa" },
+    { "name": "Nora", "role": "support" }
+  ],
+  "metadata": {
+    "focus": "Cierre de la serie con mejora real en pagos, conciliacion operativa y decision matizada sobre el proveedor alternativo",
+    "source": "synthetic-transcript",
+    "series_id": "payments-three-sprints",
+    "series_order": 9,
+    "meeting_kind": "review",
+    "followup_of": "payments-s3-midpoint"
+  },
+  "segments": [
+    { "timestamp": "00:00", "speaker": "Ane", "text": "Cerramos sprint 3 y tambien este ciclo largo de trabajo en pagos. Quiero que seamos precisos con lo que esta realmente resuelto y con lo que solo hemos encaminado." },
+    { "timestamp": "00:23", "speaker": "Mikel", "text": "El fix del timeout lo doy por cerrado. Ajustamos el callback de Apple Pay, completamos el rollout en wallets y los timeouts largos han caido mucho respecto a junio." },
+    { "timestamp": "00:49", "speaker": "Jon", "text": "Desde QA lo hemos validado con la smoke suite y con trafico real controlado. Ya no veo razon para dejar esa incidencia abierta." },
+    { "timestamp": "01:10", "speaker": "Nora", "text": "En soporte tambien se nota. Los casos de pago colgado han bajado muchisimo y los duplicados reales se detectan ahora con la conciliacion nueva en menos de una hora." },
+    { "timestamp": "01:34", "speaker": "Leire", "text": "La conciliacion minima no es un sistema perfecto, pero si una solucion operativa que ya evita revisar todos los tickets a mano." },
+    { "timestamp": "01:55", "speaker": "Ane", "text": "Entonces tanto el fix del timeout como la conciliacion minima los consideramos cerrados en este sprint." },
+    { "timestamp": "02:17", "speaker": "Mikel", "text": "Sobre el proveedor alternativo, el canary del cinco por ciento ha salido mejor en latencia y errores de wallets, pero no quiero venderlo como migracion ganada. Aun falta ver coste operativo y comportamiento en mas volumen." },
+    { "timestamp": "02:45", "speaker": "Jon", "text": "Estoy de acuerdo. Lo que si podemos decidir es el siguiente paso, no el final de la pelicula." },
+    { "timestamp": "03:04", "speaker": "Ane", "text": "Mi propuesta es mantener el proveedor actual como principal, escalar el canary del alternativo al veinte por ciento de wallets en el siguiente sprint y reevaluar con mas datos antes de cualquier migracion amplia." },
+    { "timestamp": "03:32", "speaker": "Leire", "text": "Eso me parece suficientemente ambicioso y a la vez prudente. Ni nos quedamos inmoviles ni fingimos que el problema estrategico ya esta cerrado." },
+    { "timestamp": "03:53", "speaker": "Nora", "text": "Para soporte tambien es mejor asi. Preferimos un cambio gradual que poder explicar antes que una migracion de golpe." },
+    { "timestamp": "04:12", "speaker": "Mikel", "text": "Entonces cierro con esa lectura: el canary actual se considera exitoso como experimento, pero la decision de proveedor sigue abierta a nivel estrategico." },
+    { "timestamp": "04:34", "speaker": "Ane", "text": "Perfecto. Cerramos la serie con mejora real en pagos y con una decision matizada: mantenemos proveedor principal, ampliamos canary en wallets y seguimos reevaluando." }
+  ],
+  "expected_items": [
+    {
+      "item_type": "technical_decision",
+      "title": "Mantener el proveedor actual como principal y ampliar el canary del alternativo al 20 por ciento de wallets en el siguiente sprint",
+      "summary": "El canary inicial funciona, pero el equipo opta por una ampliacion gradual en lugar de una migracion amplia inmediata."
+    }
+  ],
+  "expected_followups": [
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Corregir la estrategia de reintentos del endpoint de procesar pago con backoff exponencial"
+    },
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Extender el rollout del fix de reintentos al adaptador de wallets y medir su impacto real"
+    },
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Automatizar una conciliacion minima de pagos duplicados con el export estable de liquidaciones"
+    },
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Lanzar un canary del proveedor alternativo sobre el 5 por ciento del trafico de wallets"
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Abrir el canary del proveedor alternativo durante el sprint 3 en lugar de esperar al siguiente"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+[   0s] 9 transcripts loaded (EN dataset)
+[   0s] All chat agents backed by gpt-4o-mini
+[   0s] System prompts redirected to prompts_en/
+[   0s] First transcript title: 'Sprint 1 midpoint on progress, blockages, and new tasks in the payment flow.'
+[   0s] mode=    off starting...
+[ 487s] mode=    off pairs=8/8 recall_micro=0.059 f1_micro=0.070 coverage=0.059
+[ 487s] mode=current starting...
+[ 935s] mode=current pairs=8/8 recall_micro=0.147 f1_micro=0.169 coverage=0.147
+[ 935s] mode=    all starting...
+[1399s] mode=    all pairs=8/8 recall_micro=0.118 f1_micro=0.140 coverage=0.118
+[1399s] DONE in 23.3 min

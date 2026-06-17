@@ -1,0 +1,84 @@
+{
+  "id": "payments-s1-review",
+  "title": "Sprint 1 review y retrospectiva sobre pagos, observabilidad y decisiones abiertas",
+  "provider": "synthetic",
+  "meeting_date": "2026-06-15",
+  "organizer": "Ane",
+  "sprint_id": "s1",
+  "participants": [
+    { "name": "Ane", "role": "product owner" },
+    { "name": "Mikel", "role": "backend" },
+    { "name": "Leire", "role": "frontend" },
+    { "name": "Jon", "role": "qa" },
+    { "name": "Nora", "role": "support" }
+  ],
+  "metadata": {
+    "focus": "Cierre del sprint 1 con cierres verbales, bloqueo resuelto y tension sobre la decision de proveedor",
+    "source": "synthetic-transcript",
+    "series_id": "payments-three-sprints",
+    "series_order": 3,
+    "meeting_kind": "review",
+    "followup_of": "payments-s1-midpoint"
+  },
+  "segments": [
+    { "timestamp": "00:00", "speaker": "Ane", "text": "Cerramos sprint. Quiero distinguir muy bien lo que queda realmente hecho, lo que sigue abierto y lo que tenemos que replantear para el siguiente." },
+    { "timestamp": "00:20", "speaker": "Mikel", "text": "Los logs estructurados estan completos. Al final cubren pagos, refunds y webhooks, y todo sale con request_id y tenant. Esa parte la doy por cerrada." },
+    { "timestamp": "00:45", "speaker": "Jon", "text": "Desde QA lo confirmo. Ya pude seguir una incidencia de punta a punta sin reconstruirla a mano." },
+    { "timestamp": "01:04", "speaker": "Mikel", "text": "El bloqueo del dashboard tambien se resolvio. Compras renovo la licencia de telemetria el jueves y pude desplegar el panel de errores 5xx en produccion." },
+    { "timestamp": "01:28", "speaker": "Nora", "text": "Soporte ya lo esta mirando para ver si un pico viene del proveedor o de nosotros. Eso nos ha cambiado bastante la vida." },
+    { "timestamp": "01:48", "speaker": "Nora", "text": "El runbook de codigos de error tambien queda cerrado. Ya hemos resuelto varios tickets sin tener que preguntarle nada a backend." },
+    { "timestamp": "02:10", "speaker": "Leire", "text": "Las alertas de timeout las hemos conectado al canal que operaciones ya tenia. Era duplicado en efecto, asi que no montamos un sistema nuevo, pero la necesidad queda cubierta." },
+    { "timestamp": "02:35", "speaker": "Jon", "text": "La smoke suite minima tambien esta hecha y corre en cada deploy de pagos. No cubre todo, pero ya no vamos completamente a ciegas." },
+    { "timestamp": "02:58", "speaker": "Mikel", "text": "El endpoint de procesar pago que se quedaba colgado no lo hemos resuelto del todo. Ya sabemos que el problema viene de una estrategia mala de reintentos contra el proveedor, pero el fix con backoff se nos va al siguiente sprint." },
+    { "timestamp": "03:25", "speaker": "Ane", "text": "Vale, entonces esa tarea sigue abierta y pasa al siguiente sprint como prioridad." },
+    { "timestamp": "03:44", "speaker": "Ane", "text": "Queda el tema del proveedor secundario. En planning decidimos mantener el proveedor actual durante este sprint mientras montabamos observabilidad. Ahora ya tenemos datos." },
+    { "timestamp": "04:07", "speaker": "Mikel", "text": "Y precisamente por esos datos yo ya no estoy comodo con mantenerlo sin mas. Hemos visto picos muy feos de 5xx los lunes y creo que deberiamos empezar a hablar con otra opcion cuanto antes." },
+    { "timestamp": "04:33", "speaker": "Ane", "text": "Eso contradice la decision con la que arrancamos el sprint. No digo que no tengas razon, digo que hay que registrarlo como cambio de decision y no como continuidad." },
+    { "timestamp": "04:57", "speaker": "Leire", "text": "Yo no abriria una migracion ya, pero si una comparativa formal el siguiente sprint. Ahora por lo menos ya no opinamos a ciegas." },
+    { "timestamp": "05:19", "speaker": "Jon", "text": "Eso me encaja. No cerramos aun si cambiamos de proveedor o no, pero si abrimos la evaluacion con datos reales." },
+    { "timestamp": "05:40", "speaker": "Ane", "text": "Entonces cerramos asi: posponemos la posible migracion al siguiente sprint y abrimos una comparativa formal del proveedor actual frente a alternativas, basada en los datos del dashboard." },
+    { "timestamp": "06:05", "speaker": "Ane", "text": "Pendientes que arrastran al sprint 2: arreglar el endpoint con backoff y abrir la comparativa de proveedor. El resto lo damos por cerrado." }
+  ],
+  "expected_items": [
+    {
+      "item_type": "technical_decision",
+      "title": "Posponer la posible migracion de proveedor al siguiente sprint y abrir una comparativa formal",
+      "summary": "El equipo decide no migrar aun, pero si analizar con datos reales el proveedor actual frente a alternativas."
+    },
+    {
+      "item_type": "technical_decision",
+      "title": "Registrar como cambio de decision la reapertura del debate sobre el proveedor actual",
+      "summary": "La postura de mantener el proveedor durante el sprint deja de asumirse como estable y pasa a revisarse explicitamente."
+    }
+  ],
+  "expected_followups": [
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Anadir logs estructurados al servicio de pagos con request_id y tenant"
+    },
+    {
+      "followup_type": "blocker_resolved",
+      "matched_history_title": "Crear un dashboard de errores 5xx del checkout"
+    },
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Documentar los codigos de error del proveedor para soporte"
+    },
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Alertar cuando suban los timeouts del proveedor de pagos"
+    },
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Preparar una smoke suite minima para el flujo de pagos"
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Revisar el endpoint de procesar pago que se queda colgado en produccion"
+    },
+    {
+      "followup_type": "contradicts_decision",
+      "matched_history_title": "Mantener el proveedor actual durante el sprint mientras se monta observabilidad"
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "id": "payments-s2-review",
+  "title": "Sprint 2 review and retrospective on provider comparison and pending reconciliation.",
+  "provider": "synthetic",
+  "meeting_date": "2026-07-06",
+  "organizer": "Ane",
+  "sprint_id": "s2",
+  "participants": [
+    {
+      "name": "Ane",
+      "role": "product owner"
+    },
+    {
+      "name": "Mikel",
+      "role": "backend"
+    },
+    {
+      "name": "Leire",
+      "role": "frontend"
+    },
+    {
+      "name": "Jon",
+      "role": "qa"
+    },
+    {
+      "name": "Nora",
+      "role": "support"
+    }
+  ],
+  "metadata": {
+    "focus": "Closure of sprint 2 with completed comparison, partial rollout of the fix, and duplicates still open.",
+    "source": "synthetic-transcript",
+    "series_id": "payments-three-sprints",
+    "series_order": 6,
+    "meeting_kind": "review",
+    "followup_of": "payments-s2-midpoint"
+  },
+  "segments": [
+    {
+      "timestamp": "00:00",
+      "speaker": "Ane",
+      "text": "We’re wrapping up sprint 2. I need an honest snapshot: what’s been completed, what’s still open, and what operational decision are we taking into the next sprint."
+    },
+    {
+      "timestamp": "00:22",
+      "speaker": "Mikel",
+      "text": "The formal comparison of the provider is finished. We have a dossier with times, errors by range, and operational costs compared to two alternatives."
+    },
+    {
+      "timestamp": "00:46",
+      "speaker": "Jon",
+      "text": "That at least takes us out of the realm of intuition. Finally, we can discuss with data."
+    },
+    {
+      "timestamp": "01:05",
+      "speaker": "Mikel",
+      "text": "Regarding the timeout fix, the part about the idempotency key and retry traceability is implemented. What we haven’t done is deploy it fully because we’re still encountering weird cases with wallets."
+    },
+    {
+      "timestamp": "01:31",
+      "speaker": "Leire",
+      "text": "So, the new technical piece is done, but we’re not considering the global problem closed yet."
+    },
+    {
+      "timestamp": "01:52",
+      "speaker": "Nora",
+      "text": "We’re still stuck with duplicates. Finance gave us a manual export once, but no stable access, so we’re still reconciling by hand and without real automation."
+    },
+    {
+      "timestamp": "02:18",
+      "speaker": "Ane",
+      "text": "So duplicates remain open. We can’t sell it as resolved."
+    },
+    {
+      "timestamp": "02:37",
+      "speaker": "Mikel",
+      "text": "The comparison confirms that the current provider degrades quite a bit during Monday peaks. Still, procurement has told us that in July they won’t open a contractual change due to the summer freeze."
+    },
+    {
+      "timestamp": "03:04",
+      "speaker": "Jon",
+      "text": "That doesn’t invalidate the comparison, but it does condition the decision. We can’t migrate now even if we technically want to."
+    },
+    {
+      "timestamp": "03:24",
+      "speaker": "Leire",
+      "text": "It seems reasonable to me to keep the current provider during sprint 3, but with weekly monitoring of the SLO and preparing a technical canary for after the freeze."
+    },
+    {
+      "timestamp": "03:49",
+      "speaker": "Ane",
+      "text": "I agree. We’re not closing the debate, but we’re also not forcing an impossible migration due to the calendar."
+    },
+    {
+      "timestamp": "04:09",
+      "speaker": "Nora",
+      "text": "And for duplicates, we need a more concrete action: someone has to get support and product stable access to the settlement export, because without that, the problem doesn’t move."
+    },
+    {
+      "timestamp": "04:35",
+      "speaker": "Ane",
+      "text": "Okay. I’ll turn that into an explicit commitment for the next sprint."
+    },
+    {
+      "timestamp": "04:53",
+      "speaker": "Ane",
+      "text": "We’re closing the review: comparison finalized, idempotency key done, timeout fix not yet closed, duplicates still open, and in sprint 3 we’ll keep the current provider with weekly monitoring while we prepare the canary after the freeze."
+    }
+  ],
+  "expected_items": [
+    {
+      "item_type": "technical_decision",
+      "title": "Keep the current provider during sprint 3 with weekly SLO tracking and prepare a technical canary after the freeze.",
+      "summary": "The comparison already exists, but the contractual calendar prevents migration in July; the provider is maintained with enhanced monitoring."
+    },
+    {
+      "item_type": "task",
+      "title": "Request stable access to the settlement export to unblock the reconciliation of duplicates.",
+      "summary": "Obtain recurring access to the necessary export to stop reconciling cases manually."
+    }
+  ],
+  "expected_followups": [
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Prepare a formal comparison of the current payment provider against two alternatives."
+    },
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Add idempotency key and retry traceability to the fix of the payment processing endpoint."
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Correct the retry strategy of the payment processing endpoint with exponential backoff."
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Analyze incidents of duplicate charges and define a minimal reconciliation."
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Evaluate a controlled test with partial traffic on an alternative provider."
+    }
+  ]
+}

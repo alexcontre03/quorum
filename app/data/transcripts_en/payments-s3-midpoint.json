@@ -1,0 +1,126 @@
+{
+  "id": "payments-s3-midpoint",
+  "title": "Sprint 3 midpoint on canary results, refinement of the fix, and progress on reconciliation.",
+  "provider": "synthetic",
+  "meeting_date": "2026-07-20",
+  "organizer": "Ane",
+  "sprint_id": "s3",
+  "participants": [
+    {
+      "name": "Ane",
+      "role": "product owner"
+    },
+    {
+      "name": "Mikel",
+      "role": "backend"
+    },
+    {
+      "name": "Leire",
+      "role": "frontend"
+    },
+    {
+      "name": "Jon",
+      "role": "qa"
+    },
+    {
+      "name": "Nora",
+      "role": "support"
+    }
+  ],
+  "metadata": {
+    "focus": "Follow-up on sprint 3 with real data from the canary and final refinement of the payment front.",
+    "source": "synthetic-transcript",
+    "series_id": "payments-three-sprints",
+    "series_order": 8,
+    "meeting_kind": "midpoint",
+    "followup_of": "payments-s3-planning"
+  },
+  "segments": [
+    {
+      "timestamp": "00:00",
+      "speaker": "Ane",
+      "text": "Midpoint of sprint 3. I want concrete data: what is the canary telling us, how is reconciliation going, and if the fix is really getting close to being done."
+    },
+    {
+      "timestamp": "00:21",
+      "speaker": "Mikel",
+      "text": "The rollout of the fix in wallets has significantly improved the timeouts, but we've detected a rare case in the Apple Pay callback. It doesn't break everything, but it does require us to fine-tune that branch before closing."
+    },
+    {
+      "timestamp": "00:47",
+      "speaker": "Leire",
+      "text": "That fits with what we saw on the frontend. The problem is no longer the long general timeout, it's that specific callback route."
+    },
+    {
+      "timestamp": "01:08",
+      "speaker": "Jon",
+      "text": "So, the fix is no longer open for the same reason as in sprint 2, but we can't call it resolved yet either."
+    },
+    {
+      "timestamp": "01:28",
+      "speaker": "Nora",
+      "text": "We've made a lot of progress with reconciliation. The stable export now allows us to detect real duplicates versus apparent retries, and support no longer has to look at all the cases manually."
+    },
+    {
+      "timestamp": "01:52",
+      "speaker": "Ane",
+      "text": "That means to me that the duplicate blocking is effectively resolved and now we're in the consolidation phase, not the discovery phase."
+    },
+    {
+      "timestamp": "02:14",
+      "speaker": "Mikel",
+      "text": "The canary from the alternative provider at five percent is performing better in latency than the current provider, but I still don't want to expand it. I need another week of data and to close the Apple Pay callback first."
+    },
+    {
+      "timestamp": "02:42",
+      "speaker": "Jon",
+      "text": "That makes sense. If you expand traffic before closing that corner, you're mixing two changes at once."
+    },
+    {
+      "timestamp": "03:01",
+      "speaker": "Leire",
+      "text": "I would prepare the criteria to increase from five to twenty percent, but without executing it yet."
+    },
+    {
+      "timestamp": "03:23",
+      "speaker": "Ane",
+      "text": "We'll leave it as a possible next step, not as a closed action for this midpoint."
+    },
+    {
+      "timestamp": "03:43",
+      "speaker": "Nora",
+      "text": "The important thing for support is that we're already identifying real duplicates in less than an hour. That completely changes the operation."
+    },
+    {
+      "timestamp": "04:04",
+      "speaker": "Ane",
+      "text": "We close the midpoint: the fix is being fine-tuned in Apple Pay, reconciliation is already functioning at a minimum, and the canary is still alive but without expansion yet."
+    }
+  ],
+  "expected_items": [
+    {
+      "item_type": "task",
+      "title": "Correct the Apple Pay callback before expanding the rollout of the fix in wallets.",
+      "summary": "Resolve the specific branch that continues to show strange behavior after the rollout of the fix."
+    },
+    {
+      "item_type": "ambiguous_task",
+      "title": "Define the criteria to expand the canary of the alternative provider from 5 to 20 percent.",
+      "summary": "Prepare thresholds and conditions for expansion without executing the change yet."
+    }
+  ],
+  "expected_followups": [
+    {
+      "followup_type": "scope_change",
+      "matched_history_title": "Extend the rollout of the retry fix to the wallets adapter and measure its real impact."
+    },
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Automate a minimal reconciliation of duplicate payments with the stable settlement export."
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Launch a canary of the alternative provider on 5 percent of wallet traffic."
+    }
+  ]
+}

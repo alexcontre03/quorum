@@ -1,0 +1,63 @@
+{
+  "id": "payments-s3-midpoint",
+  "title": "Sprint 3 midpoint sobre resultados del canary, refinamiento del fix y avance de conciliacion",
+  "provider": "synthetic",
+  "meeting_date": "2026-07-20",
+  "organizer": "Ane",
+  "sprint_id": "s3",
+  "participants": [
+    { "name": "Ane", "role": "product owner" },
+    { "name": "Mikel", "role": "backend" },
+    { "name": "Leire", "role": "frontend" },
+    { "name": "Jon", "role": "qa" },
+    { "name": "Nora", "role": "support" }
+  ],
+  "metadata": {
+    "focus": "Seguimiento del sprint 3 con datos reales del canary y refinamiento final del frente de pagos",
+    "source": "synthetic-transcript",
+    "series_id": "payments-three-sprints",
+    "series_order": 8,
+    "meeting_kind": "midpoint",
+    "followup_of": "payments-s3-planning"
+  },
+  "segments": [
+    { "timestamp": "00:00", "speaker": "Ane", "text": "Mitad del sprint 3. Quiero datos concretos: que nos esta diciendo el canary, como va conciliacion y si el fix esta acercandose de verdad al cierre." },
+    { "timestamp": "00:21", "speaker": "Mikel", "text": "El rollout del fix en wallets ha mejorado bastante los timeouts, pero hemos detectado un caso raro en el callback de Apple Pay. No rompe todo, pero obliga a afinar esa rama antes de cerrar." },
+    { "timestamp": "00:47", "speaker": "Leire", "text": "Eso encaja con lo que vimos en frontend. El problema ya no es el timeout largo general, es esa ruta concreta del callback." },
+    { "timestamp": "01:08", "speaker": "Jon", "text": "O sea, el fix ya no esta abierto por lo mismo que en sprint 2, pero tampoco podemos llamarlo resuelto aun." },
+    { "timestamp": "01:28", "speaker": "Nora", "text": "Con conciliacion hemos avanzado mucho. El export estable ya nos permite detectar duplicados reales frente a reintentos aparentes, y soporte deja de mirar todos los casos a mano." },
+    { "timestamp": "01:52", "speaker": "Ane", "text": "Eso para mi significa que el bloqueo de duplicados esta efectivamente resuelto y ahora estamos en fase de consolidacion, no de descubrimiento." },
+    { "timestamp": "02:14", "speaker": "Mikel", "text": "El canary del proveedor alternativo al cinco por ciento va mejor en latencia que el proveedor actual, pero todavia no quiero ampliarlo. Necesito una semana mas de datos y cerrar el callback de Apple Pay antes." },
+    { "timestamp": "02:42", "speaker": "Jon", "text": "Tiene sentido. Si amplias trafico antes de cerrar esa esquina, mezclas dos cambios a la vez." },
+    { "timestamp": "03:01", "speaker": "Leire", "text": "Yo prepararia ya el criterio para subir del cinco al veinte por ciento, pero sin ejecutarlo todavia." },
+    { "timestamp": "03:23", "speaker": "Ane", "text": "Lo dejamos como posible siguiente paso, no como accion cerrada de este midpoint." },
+    { "timestamp": "03:43", "speaker": "Nora", "text": "Lo importante para soporte es que ya estamos identificando duplicados de verdad en menos de una hora. Eso cambia completamente la operativa." },
+    { "timestamp": "04:04", "speaker": "Ane", "text": "Cerramos midpoint: el fix se afina en Apple Pay, conciliacion ya funciona en minimo, y el canary sigue vivo pero sin ampliacion todavia." }
+  ],
+  "expected_items": [
+    {
+      "item_type": "task",
+      "title": "Corregir el callback de Apple Pay antes de ampliar el rollout del fix en wallets",
+      "summary": "Resolver la rama concreta que sigue mostrando comportamiento raro tras el rollout del fix."
+    },
+    {
+      "item_type": "ambiguous_task",
+      "title": "Definir el criterio para ampliar el canary del proveedor alternativo del 5 al 20 por ciento",
+      "summary": "Preparar umbrales y condiciones de ampliacion sin ejecutar todavia el cambio."
+    }
+  ],
+  "expected_followups": [
+    {
+      "followup_type": "scope_change",
+      "matched_history_title": "Extender el rollout del fix de reintentos al adaptador de wallets y medir su impacto real"
+    },
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Automatizar una conciliacion minima de pagos duplicados con el export estable de liquidaciones"
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Lanzar un canary del proveedor alternativo sobre el 5 por ciento del trafico de wallets"
+    }
+  ]
+}

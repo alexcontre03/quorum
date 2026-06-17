@@ -1,0 +1,108 @@
+[   0s] Loaded 9 transcripts
+[   0s] Running extraction evaluation...
+[1101s] Extraction OK -> cdia_extraction.json
+[1101s] Running follow-up ablation (3 modes)...
+Traceback (most recent call last):
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\scripts\run_cdia_evaluation.py", line 97, in <module>
+    main()
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\scripts\run_cdia_evaluation.py", line 42, in main
+    results = svc.evaluate_ablation(transcripts)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\services\followup_evaluation.py", line 97, in evaluate_ablation
+    return [
+           ^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\services\followup_evaluation.py", line 98, in <listcomp>
+    self.evaluate_dataset(transcripts, retrieval_mode=mode)
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\services\followup_evaluation.py", line 77, in evaluate_dataset
+    self._evaluate_transition(
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\services\followup_evaluation.py", line 175, in _evaluate_transition
+    analysis_current = self.orchestrator.analyze(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\agents\orchestrator.py", line 90, in analyze
+    followup_result = self.task_followup_agent.run(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\agents\task_followup_agent.py", line 115, in run
+    raw_response = self.llm_client.chat(
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\agents\ollama_client.py", line 40, in chat
+    with request.urlopen(req, timeout=timeout) as response:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 216, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 519, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 536, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 496, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 1377, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 1352, in do_open
+    r = h.getresponse()
+        ^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\http\client.py", line 1395, in getresponse
+    response.begin()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\http\client.py", line 325, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\http\client.py", line 286, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\socket.py", line 706, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+[   0s] 9 transcripts loaded
+[   0s] Ollama chat timeout patched to 600s
+Traceback (most recent call last):
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\scripts\run_cdia_followup_only.py", line 101, in <module>
+    main()
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\scripts\run_cdia_followup_only.py", line 44, in main
+    results = svc.evaluate_ablation(transcripts)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\services\followup_evaluation.py", line 97, in evaluate_ablation
+    return [
+           ^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\services\followup_evaluation.py", line 98, in <listcomp>
+    self.evaluate_dataset(transcripts, retrieval_mode=mode)
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\services\followup_evaluation.py", line 77, in evaluate_dataset
+    self._evaluate_transition(
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\services\followup_evaluation.py", line 144, in _evaluate_transition
+    analysis = self.orchestrator.analyze(pred, retrieval_mode=retrieval_mode)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\agents\orchestrator.py", line 63, in analyze
+    items, run = self.task_proposal_agent.run(transcript, definition)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\agents\task_proposal_agent.py", line 15, in run
+    raw_response = self.llm_client.chat(
+                   ^^^^^^^^^^^^^^^^^^^^^
+TypeError: _patched_chat() got an unexpected keyword argument 'base_url'
+[   0s] 9 transcripts loaded
+[   0s] Ollama chat timeout patched to 600s
+[6489s] mode=    off pairs=8/8 recall_micro=0.059 f1_micro=0.070 coverage=0.118
+[6489s] mode=current pairs=8/8 recall_micro=0.000 f1_micro=0.000 coverage=0.000
+[6489s] mode=    all pairs=7/8 recall_micro=0.000 f1_micro=0.000 coverage=0.000
+Traceback (most recent call last):
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\scripts\run_cdia_followup_only.py", line 99, in <module>
+    main()
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\scripts\run_cdia_followup_only.py", line 61, in main
+    "precision_micro": es["precision_micro"],
+                       ~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'precision_micro'
+[   0s] 9 transcripts loaded
+[   0s] Ollama chat timeout patched to 600s
+[6344s] mode=    off pairs=7/8 recall_micro=0.100 f1_micro=0.118 coverage=0.147
+[6344s] mode=current pairs=8/8 recall_micro=0.000 f1_micro=0.000 coverage=0.000
+[6344s] mode=    all pairs=8/8 recall_micro=0.000 f1_micro=0.000 coverage=0.000
+Traceback (most recent call last):
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\scripts\run_cdia_followup_only.py", line 99, in <module>
+    main()
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\scripts\run_cdia_followup_only.py", line 61, in main
+    "precision_micro": es["precision_micro"],
+                       ~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'precision_micro'

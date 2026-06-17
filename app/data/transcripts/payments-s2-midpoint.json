@@ -1,0 +1,69 @@
+{
+  "id": "payments-s2-midpoint",
+  "title": "Sprint 2 midpoint sobre refinamiento tecnico, bloqueo de conciliacion y datos de proveedor",
+  "provider": "synthetic",
+  "meeting_date": "2026-06-29",
+  "organizer": "Ane",
+  "sprint_id": "s2",
+  "participants": [
+    { "name": "Ane", "role": "product owner" },
+    { "name": "Mikel", "role": "backend" },
+    { "name": "Leire", "role": "frontend" },
+    { "name": "Jon", "role": "qa" },
+    { "name": "Nora", "role": "support" }
+  ],
+  "metadata": {
+    "focus": "Seguimiento del sprint 2 con refinamiento del fix de reintentos y bloqueo externo en conciliacion",
+    "source": "synthetic-transcript",
+    "series_id": "payments-three-sprints",
+    "series_order": 5,
+    "meeting_kind": "midpoint",
+    "followup_of": "payments-s2-planning"
+  },
+  "segments": [
+    { "timestamp": "00:00", "speaker": "Ane", "text": "Mitad de sprint. Quiero ver si estamos resolviendo de verdad el problema o solo entendiendo mejor el dolor." },
+    { "timestamp": "00:18", "speaker": "Mikel", "text": "El fix del timeout ha crecido de alcance. Solo con backoff exponencial no basta; necesitamos anadir idempotency key y trazabilidad explicita de reintentos o seguiremos teniendo casos raros." },
+    { "timestamp": "00:44", "speaker": "Jon", "text": "Eso cambia bastante el trabajo, pero tiene sentido. Si reintentas sin idempotencia, puedes reducir timeout y aun asi dejar efectos inconsistentes." },
+    { "timestamp": "01:05", "speaker": "Ane", "text": "Vale, entonces el fix no se simplifica: se amplía a backoff mas idempotency key y trazabilidad de reintentos." },
+    { "timestamp": "01:27", "speaker": "Nora", "text": "Con los cobros duplicados tenemos un bloqueo. Finanzas no nos esta dando acceso estable al export de liquidaciones y sin eso no podemos conciliar bien los casos reportados." },
+    { "timestamp": "01:51", "speaker": "Leire", "text": "Sin export fiable vamos a seguir mirando caso a caso a mano. Eso bloquea cualquier solucion medio automatizada." },
+    { "timestamp": "02:12", "speaker": "Ane", "text": "De acuerdo, eso queda como bloqueo explicito del frente de duplicados." },
+    { "timestamp": "02:31", "speaker": "Mikel", "text": "La comparativa del proveedor ya tiene datos iniciales. El actual sale peor los lunes por la manana, pero aun no tenemos una foto completa y me falta meter coste operativo." },
+    { "timestamp": "02:57", "speaker": "Jon", "text": "O sea, seguimos comparando, pero sin conclusion todavia." },
+    { "timestamp": "03:15", "speaker": "Leire", "text": "Si los datos de lunes se confirman, igual toca preparar una prueba controlada con un proveedor alternativo en una parte pequena del trafico." },
+    { "timestamp": "03:38", "speaker": "Ane", "text": "No decidamos aun mover trafico, pero dejemos esa opcion como evaluacion posible si el analisis sigue apuntando en la misma direccion." },
+    { "timestamp": "03:59", "speaker": "Mikel", "text": "Yo la dejaria apuntada ya. No como despliegue inmediato, sino como canary tecnico potencial." },
+    { "timestamp": "04:19", "speaker": "Nora", "text": "Mientras tanto, soporte sigue atendiendo duplicados a mano y no podemos prometer una fecha de cierre a esos clientes." },
+    { "timestamp": "04:40", "speaker": "Ane", "text": "Cerramos midpoint: el fix del timeout crece de alcance, duplicados se bloquea por finanzas, la comparativa sigue abierta y dejamos apuntada la posible prueba controlada con proveedor alternativo." }
+  ],
+  "expected_items": [
+    {
+      "item_type": "task",
+      "title": "Anadir idempotency key y trazabilidad de reintentos al fix del endpoint de procesar pago",
+      "summary": "Extender el fix tecnico para evitar efectos inconsistentes y poder seguir mejor cada reintento."
+    },
+    {
+      "item_type": "ambiguous_task",
+      "title": "Valorar una prueba controlada con trafico parcial en un proveedor alternativo",
+      "summary": "Posible canary tecnico si la comparativa sigue mostrando degradacion del proveedor actual."
+    }
+  ],
+  "expected_followups": [
+    {
+      "followup_type": "scope_change",
+      "matched_history_title": "Corregir la estrategia de reintentos del endpoint de procesar pago con backoff exponencial"
+    },
+    {
+      "followup_type": "new_blocker",
+      "matched_history_title": "Analizar incidencias de cobro duplicado y definir una conciliacion minima"
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Preparar una comparativa formal del proveedor de pagos actual frente a dos alternativas"
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Mantener el proveedor actual durante el sprint 2 mientras se realiza la comparativa formal"
+    }
+  ]
+}

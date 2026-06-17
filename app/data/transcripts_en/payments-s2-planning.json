@@ -1,0 +1,152 @@
+{
+  "id": "payments-s2-planning",
+  "title": "Sprint 2 planning on retries, provider comparison, and duplicate charges.",
+  "provider": "synthetic",
+  "meeting_date": "2026-06-22",
+  "organizer": "Ane",
+  "sprint_id": "s2",
+  "participants": [
+    {
+      "name": "Ane",
+      "role": "product owner"
+    },
+    {
+      "name": "Mikel",
+      "role": "backend"
+    },
+    {
+      "name": "Leire",
+      "role": "frontend"
+    },
+    {
+      "name": "Jon",
+      "role": "qa"
+    },
+    {
+      "name": "Nora",
+      "role": "support"
+    }
+  ],
+  "metadata": {
+    "focus": "Start of sprint 2 with timeout carryover, formal provider comparison, and new front on duplicate payments.",
+    "source": "synthetic-transcript",
+    "series_id": "payments-three-sprints",
+    "series_order": 4,
+    "meeting_kind": "planning",
+    "followup_of": "payments-s1-review"
+  },
+  "segments": [
+    {
+      "timestamp": "00:00",
+      "speaker": "Ane",
+      "text": "We're starting sprint 2. This time I want to clearly separate what has been resolved in observability from what is still really painful in payments."
+    },
+    {
+      "timestamp": "00:20",
+      "speaker": "Nora",
+      "text": "With logs and the dashboard, we're doing much better, but support is still receiving two types of tickets: payments that take too long and some customers who think they've been charged twice."
+    },
+    {
+      "timestamp": "00:45",
+      "speaker": "Mikel",
+      "text": "We already know where the timeout issue is coming from. The retry strategy for the payment processing endpoint is too aggressive, and we need to redo it with exponential backoff."
+    },
+    {
+      "timestamp": "01:08",
+      "speaker": "Jon",
+      "text": "For me, that fix is the number one priority for the sprint. As long as that's not under control, every deployment in payments remains delicate."
+    },
+    {
+      "timestamp": "01:28",
+      "speaker": "Ane",
+      "text": "Agreed. That commitment goes into sprint 2 as a main task, not as a leftover from the previous one."
+    },
+    {
+      "timestamp": "01:49",
+      "speaker": "Leire",
+      "text": "Regarding the payment provider, in the review we made it clear that we weren't going to migrate yet, but we would open a formal comparison with real data."
+    },
+    {
+      "timestamp": "02:12",
+      "speaker": "Ane",
+      "text": "Exactly. I want a serious comparison of the current provider against two alternatives, with times, errors, and operational costs, not random opinions."
+    },
+    {
+      "timestamp": "02:34",
+      "speaker": "Mikel",
+      "text": "We can already do that because the dashboard gives us a foundation. Still, my feeling is that the current provider is worse than we thought."
+    },
+    {
+      "timestamp": "02:57",
+      "speaker": "Nora",
+      "text": "And the issue of duplicate charges is growing. We still don't know if they are real duplicates or just customer perception, but there are already enough cases to open specific work."
+    },
+    {
+      "timestamp": "03:21",
+      "speaker": "Jon",
+      "text": "If the duplicates are related to the retries, we should study them as a separate but connected front to the timeout."
+    },
+    {
+      "timestamp": "03:43",
+      "speaker": "Mikel",
+      "text": "I propose we analyze those incidents and define a minimum reconciliation. Even if it's manual at first, we need to know what happened in each case."
+    },
+    {
+      "timestamp": "04:06",
+      "speaker": "Leire",
+      "text": "That can also help us decide if the problem is with the provider, our retry logic, or both."
+    },
+    {
+      "timestamp": "04:26",
+      "speaker": "Ane",
+      "text": "Good. So this sprint has three fronts: fix for retries with backoff, formal comparison of the provider, and analysis of duplicate charges with a minimum reconciliation."
+    },
+    {
+      "timestamp": "04:50",
+      "speaker": "Ane",
+      "text": "And the product decision during this sprint is to maintain the current provider while the comparison is being made. We're not opening migration yet."
+    },
+    {
+      "timestamp": "05:12",
+      "speaker": "Nora",
+      "text": "As long as that doesn't cover up the problem for the affected customers, I'm fine with it. But the reconciliation can't just stay theoretical."
+    },
+    {
+      "timestamp": "05:32",
+      "speaker": "Ane",
+      "text": "We're closing planning: priority on the timeout fix, formal comparison with two alternatives, study of duplicates, and maintenance of the current provider until there's a conclusion."
+    }
+  ],
+  "expected_items": [
+    {
+      "item_type": "task",
+      "title": "Correct the retry strategy of the payment processing endpoint with exponential backoff.",
+      "summary": "Redo the retries of the endpoint to reduce timeouts and stabilize the payment flow."
+    },
+    {
+      "item_type": "task",
+      "title": "Prepare a formal comparison of the current payment provider against two alternatives.",
+      "summary": "Evaluate with real data the times, errors, and operational cost of the current provider against other options."
+    },
+    {
+      "item_type": "task",
+      "title": "Analyze incidents of duplicate charges and define a minimal reconciliation.",
+      "summary": "Study whether the duplicates are real and establish a minimal way to reconcile them."
+    },
+    {
+      "item_type": "technical_decision",
+      "title": "Keep the current provider during sprint 2 while the formal comparison is conducted.",
+      "summary": "No migration is opened during this sprint; first, the comparative analysis is completed."
+    }
+  ],
+  "expected_followups": [
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Review the payment processing endpoint that hangs in production."
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Postpone the possible provider migration to the next sprint and open a formal comparison."
+    }
+  ]
+}

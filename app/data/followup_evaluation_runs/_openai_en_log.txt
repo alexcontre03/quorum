@@ -1,0 +1,129 @@
+[   0s] 9 transcripts loaded (EN dataset)
+[   0s] All chat agents backed by gpt-4o-mini
+[   0s] System prompts redirected to prompts_en/
+[   0s] First transcript title: 'Sprint 1 midpoint on progress, blockages, and new tasks in the payment flow.'
+[   0s] mode=    off starting...
+[ 520s] mode=    off pairs=8/8 recall_micro=0.059 f1_micro=0.069 coverage=0.059
+[ 520s] mode=current starting...
+Traceback (most recent call last):
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\scripts\run_openai_full_benchmark_en.py", line 169, in <module>
+    main()
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\scripts\run_openai_full_benchmark_en.py", line 153, in main
+    r = svc.evaluate_dataset(transcripts, retrieval_mode=mode)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\services\followup_evaluation.py", line 77, in evaluate_dataset
+    self._evaluate_transition(
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\services\followup_evaluation.py", line 175, in _evaluate_transition
+    analysis_current = self.orchestrator.analyze(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\agents\orchestrator.py", line 87, in analyze
+    retrieved_chunks_by_item = self._retrieve_chunks(
+                               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\agents\orchestrator.py", line 183, in _retrieve_chunks
+    chunks = self.retriever.retrieve(
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\services\transcript_retriever.py", line 148, in retrieve
+    query_vec = self.ollama.embed(
+                ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\agents\ollama_client.py", line 129, in embed
+    with request.urlopen(req, timeout=timeout) as response:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 216, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 519, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 536, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 496, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 1377, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 1352, in do_open
+    r = h.getresponse()
+        ^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\http\client.py", line 1395, in getresponse
+    response.begin()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\http\client.py", line 325, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\http\client.py", line 286, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\socket.py", line 706, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+[   0s] 9 transcripts loaded (EN dataset)
+[   0s] All chat agents backed by gpt-4o-mini
+[   0s] System prompts redirected to prompts_en/
+[   0s] First transcript title: 'Sprint 1 midpoint on progress, blockages, and new tasks in the payment flow.'
+[   0s] mode=    off already exists, skipping
+[   0s] mode=current starting...
+Traceback (most recent call last):
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\scripts\run_openai_full_benchmark_en.py", line 169, in <module>
+    main()
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\scripts\run_openai_full_benchmark_en.py", line 153, in main
+    r = svc.evaluate_dataset(transcripts, retrieval_mode=mode)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\services\followup_evaluation.py", line 77, in evaluate_dataset
+    self._evaluate_transition(
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\services\followup_evaluation.py", line 175, in _evaluate_transition
+    analysis_current = self.orchestrator.analyze(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\agents\orchestrator.py", line 87, in analyze
+    retrieved_chunks_by_item = self._retrieve_chunks(
+                               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\agents\orchestrator.py", line 183, in _retrieve_chunks
+    chunks = self.retriever.retrieve(
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\services\transcript_retriever.py", line 148, in retrieve
+    query_vec = self.ollama.embed(
+                ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\alexc\OneDrive\Escritorio\TFG\app\agents\ollama_client.py", line 129, in embed
+    with request.urlopen(req, timeout=timeout) as response:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 216, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 519, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 536, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 496, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 1377, in http_open
+    return self.do_open(http.client.HTTPConnection, req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\urllib\request.py", line 1352, in do_open
+    r = h.getresponse()
+        ^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\http\client.py", line 1395, in getresponse
+    response.begin()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\http\client.py", line 325, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\http\client.py", line 286, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\socket.py", line 706, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+[   0s] 9 transcripts loaded (EN dataset)
+[   0s] All chat agents backed by gpt-4o-mini
+[   0s] System prompts redirected to prompts_en/
+[   0s] First transcript title: 'Sprint 1 midpoint on progress, blockages, and new tasks in the payment flow.'
+[   0s] mode=    off already exists, skipping
+[   0s] mode=current starting...
+[ 586s] mode=current pairs=8/8 recall_micro=0.118 f1_micro=0.125 coverage=0.118
+[ 586s] mode=    all starting...
+[1226s] mode=    all pairs=8/8 recall_micro=0.118 f1_micro=0.118 coverage=0.118
+[1226s] DONE in 20.4 min

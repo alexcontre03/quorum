@@ -1,0 +1,79 @@
+{
+  "id": "payments-s3-planning",
+  "title": "Sprint 3 planning sobre rollout del fix de pagos, conciliacion y canary de proveedor alternativo",
+  "provider": "synthetic",
+  "meeting_date": "2026-07-13",
+  "organizer": "Ane",
+  "sprint_id": "s3",
+  "participants": [
+    { "name": "Ane", "role": "product owner" },
+    { "name": "Mikel", "role": "backend" },
+    { "name": "Leire", "role": "frontend" },
+    { "name": "Jon", "role": "qa" },
+    { "name": "Nora", "role": "support" }
+  ],
+  "metadata": {
+    "focus": "Arranque del sprint 3 con acceso estable a conciliacion, rollout del fix y cambio de postura sobre el proveedor",
+    "source": "synthetic-transcript",
+    "series_id": "payments-three-sprints",
+    "series_order": 7,
+    "meeting_kind": "planning",
+    "followup_of": "payments-s2-review"
+  },
+  "segments": [
+    { "timestamp": "00:00", "speaker": "Ane", "text": "Entramos en sprint 3. Quiero que este sprint sirva para cerrar lo que lleva demasiado tiempo abierto sin inventarnos un final bonito que luego no aguante." },
+    { "timestamp": "00:22", "speaker": "Nora", "text": "Buenas noticias primero: finanzas por fin nos ha dado acceso estable al export de liquidaciones. Ya no dependemos de pedir un CSV manual cada vez." },
+    { "timestamp": "00:47", "speaker": "Ane", "text": "Perfecto. Entonces la peticion de acceso la damos por cerrada y el bloqueo principal de conciliacion desaparece." },
+    { "timestamp": "01:08", "speaker": "Mikel", "text": "Con eso ya podemos hacer una conciliacion minima de verdad. No solo mirar casos a mano, sino cruzar intento, liquidacion y resultado del proveedor." },
+    { "timestamp": "01:31", "speaker": "Jon", "text": "Y el fix del timeout sigue abierto. La parte de idempotency key esta hecha, pero nos falta extender el rollout al adaptador de wallets y medirlo con trafico real." },
+    { "timestamp": "01:55", "speaker": "Leire", "text": "En frontend tambien necesitamos instrumentar mejor los callbacks de wallet porque ahi siguen apareciendo algunos estados raros." },
+    { "timestamp": "02:18", "speaker": "Ane", "text": "Vale, ese compromiso no desaparece: se refina y se lleva a rollout progresivo sobre wallets." },
+    { "timestamp": "02:40", "speaker": "Mikel", "text": "Sobre el proveedor, con la comparativa en la mano y el freeze ya acabado, yo no esperaria al sprint 4 para probar algo. Propongo abrir un canary del proveedor alternativo al cinco por ciento del trafico de wallets." },
+    { "timestamp": "03:07", "speaker": "Jon", "text": "Eso cambia lo que dijimos en la review anterior. Alli acordamos mantener el proveedor actual durante todo este sprint y solo preparar el canary para despues." },
+    { "timestamp": "03:29", "speaker": "Ane", "text": "Correcto. Si damos ese paso, hay que tratarlo como cambio de decision, no como simple continuidad." },
+    { "timestamp": "03:50", "speaker": "Leire", "text": "A mi me encaja si el canary se acota a wallets y si tenemos rollback claro. No compraria un cambio mas amplio sin esa red de seguridad." },
+    { "timestamp": "04:13", "speaker": "Nora", "text": "Y mientras tanto quiero que la conciliacion deje de ser artesanal. Si podemos detectar duplicados reales en menos de una hora, soporte gana muchisimo." },
+    { "timestamp": "04:37", "speaker": "Ane", "text": "Entonces los tres frentes del sprint son: rollout progresivo del fix en wallets, conciliacion minima automatizable y canary del proveedor alternativo muy controlado." },
+    { "timestamp": "05:00", "speaker": "Ane", "text": "Dejamos por escrito la decision nueva: abrimos canary limitado en sprint 3 en lugar de esperar al siguiente, porque ahora ya tenemos comparativa, observabilidad y fin del freeze." }
+  ],
+  "expected_items": [
+    {
+      "item_type": "task",
+      "title": "Extender el rollout del fix de reintentos al adaptador de wallets y medir su impacto real",
+      "summary": "Llevar el fix ya implementado al trafico de wallets y seguir su comportamiento con datos reales."
+    },
+    {
+      "item_type": "task",
+      "title": "Automatizar una conciliacion minima de pagos duplicados con el export estable de liquidaciones",
+      "summary": "Cruzar intentos, liquidaciones y resultado del proveedor para dejar de resolver duplicados solo a mano."
+    },
+    {
+      "item_type": "task",
+      "title": "Lanzar un canary del proveedor alternativo sobre el 5 por ciento del trafico de wallets",
+      "summary": "Probar de forma acotada un proveedor alternativo con rollback claro y observabilidad completa."
+    },
+    {
+      "item_type": "technical_decision",
+      "title": "Abrir el canary del proveedor alternativo durante el sprint 3 en lugar de esperar al siguiente",
+      "summary": "El equipo cambia la postura anterior porque ya dispone de comparativa, observabilidad y fin del freeze contractual."
+    }
+  ],
+  "expected_followups": [
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Solicitar acceso estable al export de liquidaciones para desbloquear la conciliacion de duplicados"
+    },
+    {
+      "followup_type": "blocker_resolved",
+      "matched_history_title": "Analizar incidencias de cobro duplicado y definir una conciliacion minima"
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Corregir la estrategia de reintentos del endpoint de procesar pago con backoff exponencial"
+    },
+    {
+      "followup_type": "contradicts_decision",
+      "matched_history_title": "Mantener el proveedor actual durante el sprint 3 con seguimiento semanal de SLO y preparar un canary tecnico tras el freeze"
+    }
+  ]
+}

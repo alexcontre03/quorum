@@ -1,0 +1,155 @@
+{
+  "id": "payments-s1-midpoint",
+  "title": "Sprint 1 midpoint on progress, blockages, and new tasks in the payment flow.",
+  "provider": "synthetic",
+  "meeting_date": "2026-06-08",
+  "organizer": "Ane",
+  "sprint_id": "s1",
+  "participants": [
+    {
+      "name": "Ane",
+      "role": "product owner"
+    },
+    {
+      "name": "Mikel",
+      "role": "backend"
+    },
+    {
+      "name": "Leire",
+      "role": "frontend"
+    },
+    {
+      "name": "Jon",
+      "role": "qa"
+    },
+    {
+      "name": "Nora",
+      "role": "support"
+    }
+  ],
+  "metadata": {
+    "focus": "Follow-up on sprint 1 with scope changes, operational blockages, and new work.",
+    "source": "synthetic-transcript",
+    "series_id": "payments-three-sprints",
+    "series_order": 2,
+    "meeting_kind": "midpoint",
+    "followup_of": "payments-s1-planning"
+  },
+  "segments": [
+    {
+      "timestamp": "00:00",
+      "speaker": "Ane",
+      "text": "We're halfway through the sprint. I want to see what's going well, where we've gotten stuck, and what has come up that wasn't in the planning."
+    },
+    {
+      "timestamp": "00:19",
+      "speaker": "Mikel",
+      "text": "The structured logs are already in the main payments service, but when we implemented it, we saw that refunds and webhooks are left out. We need to expand the task to cover those two points if we want complete traceability."
+    },
+    {
+      "timestamp": "00:46",
+      "speaker": "Jon",
+      "text": "That doesn't sound like a new task to me, but rather that the actual scope was greater than we thought."
+    },
+    {
+      "timestamp": "01:05",
+      "speaker": "Ane",
+      "text": "Okay, it stays as an expansion of the logging commitment, not as an isolated item."
+    },
+    {
+      "timestamp": "01:24",
+      "speaker": "Mikel",
+      "text": "With the dashboard, we have a more serious problem. The telemetry provider has warned us that the license expires this week, and without renewal, we can't deploy panels in production."
+    },
+    {
+      "timestamp": "01:48",
+      "speaker": "Ane",
+      "text": "So that's a clear blocker. As long as the license isn't renewed, the dashboard is on hold."
+    },
+    {
+      "timestamp": "02:05",
+      "speaker": "Leire",
+      "text": "Regarding the timeout alerts, operations already has a channel with very similar alerts set up for another team. If we reuse it, we might avoid creating something duplicate."
+    },
+    {
+      "timestamp": "02:31",
+      "speaker": "Ane",
+      "text": "Confirm that before we move on. If something useful already exists, it doesn't make sense to set up another thing in parallel."
+    },
+    {
+      "timestamp": "02:48",
+      "speaker": "Nora",
+      "text": "The runbook is going really well. We already have half of the codes documented, and support is starting to use it in real tickets."
+    },
+    {
+      "timestamp": "03:08",
+      "speaker": "Ane",
+      "text": "The review of the secondary provider that we noted down is still untouched, right?"
+    },
+    {
+      "timestamp": "03:25",
+      "speaker": "Mikel",
+      "text": "Correct. We haven't done any comparisons or talked to anyone. It's still pending and still has no data to decide."
+    },
+    {
+      "timestamp": "03:46",
+      "speaker": "Nora",
+      "text": "There's another new thing. This week several clients have told us that processing payments sometimes hangs for almost thirty seconds before responding."
+    },
+    {
+      "timestamp": "04:10",
+      "speaker": "Mikel",
+      "text": "We need to investigate that right away. We have to check the payment processing endpoint in production and understand if the timeout is coming from the provider or from our retries."
+    },
+    {
+      "timestamp": "04:34",
+      "speaker": "Jon",
+      "text": "And if we're going to touch payments, I need a minimal smoke suite for the flow. Every change in this area is making us nervous to deploy."
+    },
+    {
+      "timestamp": "04:56",
+      "speaker": "Leire",
+      "text": "I would add a question. If they don't renew the telemetry, we might have to decide whether to keep fighting with that provider or look for another tool."
+    },
+    {
+      "timestamp": "05:20",
+      "speaker": "Ane",
+      "text": "Alright. Let's wrap it up like this: expansion of logging to refunds and webhooks, dashboard blocked due to license, check if the alerts already exist, investigate the timeout in payment processing, prepare a smoke suite, and leave the question of the telemetry tool open."
+    }
+  ],
+  "expected_items": [
+    {
+      "item_type": "task",
+      "title": "Review the payment processing endpoint that hangs in production.",
+      "summary": "Investigate the timeouts of nearly thirty seconds reported by customers and support."
+    },
+    {
+      "item_type": "task",
+      "title": "Prepare a minimal smoke suite for the payment flow.",
+      "summary": "Have basic coverage that is reliable before deploying changes in payments."
+    },
+    {
+      "item_type": "ambiguous_task",
+      "title": "Evaluate whether to renew the current telemetry or look for another tool.",
+      "summary": "It is raised as an open question due to the license block, with no formal decision yet."
+    }
+  ],
+  "expected_followups": [
+    {
+      "followup_type": "scope_change",
+      "matched_history_title": "Add structured logs to the payment service with request_id and tenant."
+    },
+    {
+      "followup_type": "new_blocker",
+      "matched_history_title": "Create a dashboard for 5xx errors from the checkout."
+    },
+    {
+      "followup_type": "possible_duplicate",
+      "matched_history_title": "Alert when the payment provider's timeouts increase."
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Review whether it is advisable to work with a secondary payment provider."
+    }
+  ]
+}

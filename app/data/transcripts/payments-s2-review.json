@@ -1,0 +1,73 @@
+{
+  "id": "payments-s2-review",
+  "title": "Sprint 2 review y retrospectiva sobre comparativa de proveedor y conciliacion pendiente",
+  "provider": "synthetic",
+  "meeting_date": "2026-07-06",
+  "organizer": "Ane",
+  "sprint_id": "s2",
+  "participants": [
+    { "name": "Ane", "role": "product owner" },
+    { "name": "Mikel", "role": "backend" },
+    { "name": "Leire", "role": "frontend" },
+    { "name": "Jon", "role": "qa" },
+    { "name": "Nora", "role": "support" }
+  ],
+  "metadata": {
+    "focus": "Cierre del sprint 2 con comparativa terminada, rollout parcial del fix y duplicados aun abiertos",
+    "source": "synthetic-transcript",
+    "series_id": "payments-three-sprints",
+    "series_order": 6,
+    "meeting_kind": "review",
+    "followup_of": "payments-s2-midpoint"
+  },
+  "segments": [
+    { "timestamp": "00:00", "speaker": "Ane", "text": "Cerramos sprint 2. Necesito una foto honesta: que se ha completado, que sigue abierto y que decision operativa nos llevamos al siguiente sprint." },
+    { "timestamp": "00:22", "speaker": "Mikel", "text": "La comparativa formal del proveedor esta terminada. Tenemos dossier con tiempos, errores por franja y coste operativo frente a dos alternativas." },
+    { "timestamp": "00:46", "speaker": "Jon", "text": "Eso al menos ya nos saca del terreno de las intuiciones. Por fin podemos discutir con datos." },
+    { "timestamp": "01:05", "speaker": "Mikel", "text": "Sobre el fix del timeout, la parte de idempotency key y trazabilidad de reintentos esta implementada. Lo que no hemos hecho es desplegarlo al cien por cien porque siguen saliendo casos raros con wallets." },
+    { "timestamp": "01:31", "speaker": "Leire", "text": "O sea, la pieza tecnica nueva esta hecha, pero el problema global no lo damos por cerrado todavia." },
+    { "timestamp": "01:52", "speaker": "Nora", "text": "Con duplicados seguimos atascadas. Finanzas nos dio un export manual una vez, pero no acceso estable, asi que seguimos conciliando a mano y sin automatizacion real." },
+    { "timestamp": "02:18", "speaker": "Ane", "text": "Entonces duplicados se queda abierto. No podemos venderlo como resuelto." },
+    { "timestamp": "02:37", "speaker": "Mikel", "text": "La comparativa confirma que el proveedor actual se degrada bastante en los picos del lunes. Aun asi, procurement nos ha dicho que en julio no van a abrir cambio contractual por el freeze de verano." },
+    { "timestamp": "03:04", "speaker": "Jon", "text": "Eso no invalida la comparativa, pero si condiciona la decision. No podemos migrar ya aunque tecnicamente nos apetezca." },
+    { "timestamp": "03:24", "speaker": "Leire", "text": "Lo razonable me parece mantener el proveedor actual durante el sprint 3, pero con seguimiento semanal de SLO y dejando preparado un canary tecnico para despues del freeze." },
+    { "timestamp": "03:49", "speaker": "Ane", "text": "Estoy de acuerdo. No cerramos el debate, pero tampoco forzamos una migracion imposible por calendario." },
+    { "timestamp": "04:09", "speaker": "Nora", "text": "Y para duplicados necesitamos una accion mas concreta: alguien tiene que conseguir a soporte y producto acceso estable al export de liquidaciones, porque sin eso el problema no se mueve." },
+    { "timestamp": "04:35", "speaker": "Ane", "text": "Vale. Eso lo convierto en compromiso explicito para el sprint siguiente." },
+    { "timestamp": "04:53", "speaker": "Ane", "text": "Cerramos review: comparativa finalizada, idempotency key hecha, fix de timeout aun no cerrado, duplicados sigue abierto, y en sprint 3 mantenemos proveedor actual con seguimiento semanal mientras preparamos canary despues del freeze." }
+  ],
+  "expected_items": [
+    {
+      "item_type": "technical_decision",
+      "title": "Mantener el proveedor actual durante el sprint 3 con seguimiento semanal de SLO y preparar un canary tecnico tras el freeze",
+      "summary": "La comparativa ya existe, pero el calendario contractual impide migrar en julio; se mantiene el proveedor con vigilancia reforzada."
+    },
+    {
+      "item_type": "task",
+      "title": "Solicitar acceso estable al export de liquidaciones para desbloquear la conciliacion de duplicados",
+      "summary": "Conseguir acceso recurrente al export necesario para dejar de conciliar casos a mano."
+    }
+  ],
+  "expected_followups": [
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Preparar una comparativa formal del proveedor de pagos actual frente a dos alternativas"
+    },
+    {
+      "followup_type": "verbal_close",
+      "matched_history_title": "Anadir idempotency key y trazabilidad de reintentos al fix del endpoint de procesar pago"
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Corregir la estrategia de reintentos del endpoint de procesar pago con backoff exponencial"
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Analizar incidencias de cobro duplicado y definir una conciliacion minima"
+    },
+    {
+      "followup_type": "recurring_unresolved",
+      "matched_history_title": "Valorar una prueba controlada con trafico parcial en un proveedor alternativo"
+    }
+  ]
+}
